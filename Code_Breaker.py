@@ -41,8 +41,6 @@ class predicate:
     def shape(self):
         return "{}({})".format(self.name,self.constant)
     
-    
-    
 class And:
 
     def __init__(self, *args):
@@ -76,21 +74,6 @@ class And:
                 value = False
                 break
         return value
-
-class Not:
-    
-    def __init__(self, elem):
-        self.elem = elem
-        
-    def shape(self):
-        return"~{}".format(self.elem.shape())
-        
-    def getValue(self, constant):
-        check = self.elem.getValue(constant)
-        if check == None:
-            return None
-        else:
-            return not check 
         
 class onlyN:
     
