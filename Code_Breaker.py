@@ -76,39 +76,7 @@ class And:
                 value = False
                 break
         return value
-    
-class Or:
-    
-    def __init__(self, *args):
-        self.elements = args
-        self.value = None
-    
-            
-    # returns the symbols in a natural language that can be easily understand       
-    def shape(self):  
-        string = "("
-        for elem in self.elements:
-            if elem != self.elements[-1]:
-                string += "{} v ".format(elem.shape())
-            else :
-                string += "{})".format(elem.shape()) 
-        return string
-    
-    def add(self,elem):
-        self.elements += (elem,)
-            
-    def getValue(self,constant):
-        value = False
-        for elem in self.elements:
-            check = elem.getValue(constant)
-            if check == None:
-                value = None
-                continue
-            elif check:
-                value = True
-                break
-        return value
-    
+
 class Not:
     
     def __init__(self, elem):
@@ -123,63 +91,6 @@ class Not:
             return None
         else:
             return not check 
-        
-class Implies:
-    
-    def __init__(self, elem1, elem2):
-        self.elem1 = elem1
-        self.elem2 = elem2
-        
-    def shape(self):
-        return "({})-->({})".format(self.elem1.shape(),self.elem2.shape())
-    
-    def getValue(self, constant):
-        e1Value = self.elem1.getValue(constant)
-        e2Value = self.elem2.getValue(constant)
-        if e2Value == True or e1Value == False:
-            return True
-        elif e1Value == None or e2Value == None:
-            return None
-        else:
-            return False
-        
-class Bi:
-    
-    def __init__(self, elem1, elem2):
-        self.elem1 = elem1
-        self.elem2 = elem2
-            
-    def shape(self):
-        return "({})<-->({})".format(self.elem1.shape(),self.elem2.shape())
-    
-    def getValue(self, constant):
-        e1Value = self.elem1.getValue(constant)
-        e2Value = self.elem2.getValue(constant)
-        if e2Value == None or e1Value == None:
-            return None
-        elif e1Value == e2Value:
-            return True
-        else:
-            return False
-        
-class Zor:
-    
-    def __init__(self, elem1, elem2):
-        self.elem1 = elem1
-        self.elem2 = elem2
-            
-    def shape(self):
-        return "({}) != ({})".format(self.elem1.shape(),self.elem2.shape())
-    
-    def getValue(self, constant):
-        e1Value = self.elem1.getValue(constant)
-        e2Value = self.elem2.getValue(constant)
-        if e2Value == None or e1Value == None:
-            return None
-        elif e1Value == e2Value:
-            return False
-        else:
-            return True
         
 class onlyN:
     
